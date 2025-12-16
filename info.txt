@@ -1,0 +1,14 @@
+Création d'un site de vente en ligne.
+Page d'accueil : Un menu de navigation, un aperçu des différentes catégories de produits avec pour chaque catégories, un lien menant vers la page de préentation de tous les produits.
+
+Page produits : Présente tous les produits par catégories (ordinateurs, téléphones, imprimante, accessoires, etc). Sur cette page, il y aura un sous menus qui permet de catégoriser chaque produit.
+
+Page Contact : Un formulaire pour permettre au client de nous contacter.
+
+Page montantTotal : Calcul le montant total de la facture.
+
+Page paiement : Gère le paiement de la facture
+
+Fonctionnalités : Possibilités d'ajout et de suppression des produits pour un panier. Calcul du montant total et génération de facture plus système de paiement en ligne.
+
+Possiblité de cliquer sur un article pour avoir tout ses détails ou commander

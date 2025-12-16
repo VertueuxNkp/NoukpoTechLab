@@ -1,0 +1,94 @@
+<!-- Formulaire de contact (existant) -->
+<form method="POST" action="pages/saveContact.php" enctype="multipart/form-data" id="form" class="form-group row g-3 mx-auto mt-5 mb-5 w-50 border-primary p-4 shadow rounded-3">
+    <div class="field-container col-md-12 mb-4">
+        <label for="nom">Nom et prénoms : </label>
+        <input type="text" name="nom" class="form-control" id="nom">
+        <span class="messageSpan" id="spanNom"></span>
+    </div>
+
+    <div class="field-container col-md-12 mb-4">
+        <label for="mail">Email : </label>
+        <input type="text" name="mail" class="form-control" id="mail">
+        <span class="messageSpan" id="spanMail"></span>		
+    </div>
+    
+    <div class="field-container col-md-12 mb-4">
+        <label for="numero">Numéro de Téléphone (Whatsapp) : </label>
+        <input type="number" name="numero" class="form-control" id="numero">
+        <span class="messageSpan" id="spanNumero"></span>		
+    </div>
+
+    <div class="field-container col-md-12 mb-4">
+        <label for="texte">Message : </label>
+        <textarea name="texte" id="texte" rows="7" class="form-control" id="texte"></textarea>
+        <span class="messageSpan" id="spanTexte"></span>		
+    </div>
+
+    <input type="hidden" value="enregistrer" name="action">
+
+    <div id="enregistrer" class="col-12">
+        <button type="submit" id="button" class="btn btn-primary">Envoyer</button>
+    </div>
+</form>
+
+<!-- Modal de confirmation -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="confirmationModalLabel">Confirmation d'envoi</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="modalMessageContent">
+                    <!-- Le contenu sera rempli par JavaScript -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script pour gérer l'affichage du modal -->
+<script>
+// Vérifier si le paramètre 'save' est présent dans l'URL
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const saveParam = urlParams.get('save');
+    
+    if (saveParam === 'oui') {
+        // Afficher le message de succès
+        document.getElementById('modalMessageContent').innerHTML = `
+            <div class="text-center">
+                <div class="mb-3">
+                    <i class="fas fa-check-circle text-success" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="text-success">Message envoyé avec succès !</h5>
+                <p class="text-muted">Nous avons bien reçu votre message et nous vous répondrons dans les plus brefs délais.</p>
+            </div>
+        `;
+        
+        // Afficher le modal
+        const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+        confirmationModal.show();
+        
+    } else if (saveParam === 'non') {
+        // Afficher le message d'erreur
+        document.getElementById('modalMessageContent').innerHTML = `
+            <div class="text-center">
+                <div class="mb-3">
+                    <i class="fas fa-exclamation-circle text-danger" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="text-danger">Erreur lors de l'envoi</h5>
+                <p class="text-muted">Une erreur s'est produite lors de l'envoi de votre message. Veuillez réessayer.</p>
+            </div>
+        `;
+        
+        // Afficher le modal
+        const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+        confirmationModal.show();
+    }
+});
+</script>

@@ -1,0 +1,13 @@
+/* Styles pour les spans de message */
+.form-group span {
+    display: block;
+    min-height: 10px;
+    font-size: 0.775rem;
+    font-family: BlinkMacSystemFont;
+}
+
+/* Fixer la hauteur du formulaire */
+#form {
+    height: 620px; /* Ajustez selon vos besoins */
+    overflow: visible;
+}
