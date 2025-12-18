@@ -1,3 +1,24 @@
+<?php
+    // En haut de votre page contact, avant le formulaire
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Récupérer les anciennes données en cas d'erreur
+    $old_nom = $_SESSION['old_contact_data']['nom'] ?? '';
+    $old_mail = $_SESSION['old_contact_data']['mail'] ?? '';
+    $old_numero = $_SESSION['old_contact_data']['numero'] ?? '';
+    $old_texte = $_SESSION['old_contact_data']['texte'] ?? '';
+
+    // Récupérer les erreurs
+    $erreurs = $_SESSION['contact_erreurs'] ?? [];
+
+    // Nettoyer après récupération (important!)
+    if (isset($_SESSION['old_contact_data'])) unset($_SESSION['old_contact_data']);
+    if (isset($_SESSION['contact_erreurs'])) unset($_SESSION['contact_erreurs']);
+?>
+
+
 <!-- Formulaire de contact (existant) -->
 <form method="POST" action="pages/saveContact.php" enctype="multipart/form-data" id="form" class="form-group row g-3 mx-auto mt-5 mb-5 w-50 border-primary p-4 shadow rounded-3">
     <div class="field-container col-md-12 mb-4">

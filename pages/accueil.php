@@ -1,5 +1,8 @@
 <?php 
     include("includes/selectionArticle.php");
+    function e($string) {
+        return htmlspecialchars($string ?? '', ENT_QUOTES, 'UTF-8');
+    }
 ?>
 
 
@@ -22,7 +25,14 @@
                 <div class="card-body">
                     <h5 class="card-title"><?php echo($ordinateur["nomComplet"]) ?></h5>
                     <p class="card-text"><?php echo($ordinateur["description"]) ?></p>
-                    <a id="add" class="btn btn-primary" data-id="<?php echo $ordinateur['idArticle']; ?>">Ajouter au panier</a>
+                    <button class="btn btn-primary w-100 ajouter-panier"
+                                                data-id="<?= (int)$ordinateur['idArticle'] ?>"
+                                                data-nom="<?= e($ordinateur['nomComplet']) ?>"
+                                                data-image="<?= e($ordinateur['urlimage']) ?>"
+                                                data-prix="<?= isset($ordinateur['prixUnitaire']) ? floatval($ordinateur['prixUnitaire']) : 0 ?>">
+                                            <i class="fas fa-cart-plus me-2"></i>
+                                            Ajouter au panier
+                    </button>
                 </div>
                 </div>
             </div>
@@ -52,7 +62,14 @@
                 <div class="card-body">
                     <h5 class="card-title"><?php echo($imprimante["nomComplet"]) ?></h5>
                     <p class="card-text"><?php echo($imprimante["description"]) ?></p>
-                    <a id="add" class="btn btn-primary" data-id="<?php echo $ordinateur['idArticle']; ?>">Ajouter au panier</a>
+                    <button class="btn btn-primary w-100 ajouter-panier"
+                                                data-id="<?= (int)$imprimante['idArticle'] ?>"
+                                                data-nom="<?= e($imprimante['nomComplet']) ?>"
+                                                data-image="<?= e($imprimante['urlimage']) ?>"
+                                                data-prix="<?= isset($imprimante['prixUnitaire']) ? floatval($imprimante['prixUnitaire']) : 0 ?>">
+                                            <i class="fas fa-cart-plus me-2"></i>
+                                            Ajouter au panier
+                    </button>
                 </div>
                 </div>
             </div>

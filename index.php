@@ -87,7 +87,7 @@
         .add-to-panier {
             position: fixed;
             bottom: 30px;
-            right: 30px;
+            left: 30px;
             width: 50px;
             height: 50px;
             border: none;
@@ -127,10 +127,8 @@
             window.addEventListener('scroll', function() {
                 if (window.pageYOffset > 300) {
                     backToTopBtn.classList.add('show');
-                    backToToAdd.classList.add('show');
                 } else {
                     backToTopBtn.classList.remove('show');
-                    backToToAdd.classList.remove('show');
                 }
             });
             

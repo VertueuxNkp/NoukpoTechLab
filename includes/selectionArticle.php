@@ -1,14 +1,31 @@
 <?php
-    include("connexion.php");
+// includes/selectionArticle.php - Version sécurisée
 
-    $ordinateurRequete = sprintf("SELECT * FROM article WHERE categorie = 'ordinateurs'");
-    $imprimanteRequete = sprintf("SELECT * FROM article WHERE categorie = 'imprimantes'");
-    $telephoneRequete = sprintf("SELECT * FROM article WHERE categorie = 'telephones'");
-    $accessoireRequete = sprintf("SELECT * FROM article WHERE categorie = 'accessoires'");
+require_once 'connexion.php';
 
-    $listeOrdinateur = mysqli_query($bdd, $ordinateurRequete);
-    $listeImprimante = mysqli_query($bdd, $imprimanteRequete);
-    $listeTelephone = mysqli_query($bdd, $telephoneRequete);
-    $listeAccessoire = mysqli_query($bdd, $accessoireRequete);
+// Fonction pour récupérer les articles par catégorie (sécurisée)
+function getArticlesByCategory($categorie) {
+    global $bdd;
+    
+    // Liste blanche des catégories autorisées
+    $categories_valides = ['ordinateurs', 'imprimantes', 'telephones', 'accessoires'];
+    
+    // Validation
+    if (!in_array($categorie, $categories_valides)) {
+        $categorie = 'ordinateurs';
+    }
+    
+    // REQUÊTE PRÉPARÉE (protection injection SQL)
+    $stmt = mysqli_prepare($bdd, "SELECT * FROM article WHERE categorie = ?");
+    mysqli_stmt_bind_param($stmt, "s", $categorie);
+    mysqli_stmt_execute($stmt);
+    
+    return mysqli_stmt_get_result($stmt);
+}
 
-    //var_dump($listeOrdinateur);
+// Pour compatibilité avec votre code existant
+$listeOrdinateur = getArticlesByCategory('ordinateurs');
+$listeImprimante = getArticlesByCategory('imprimantes');
+$listeTelephone = getArticlesByCategory('telephones');
+$listeAccessoire = getArticlesByCategory('accessoires');
+?>
